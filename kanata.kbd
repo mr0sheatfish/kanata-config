@@ -1,0 +1,113 @@
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc pgup
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \    pgdn
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret       home
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft   up      end
+  lctl lmet lalt           spc            ralt      rctl left   down    rght
+)
+
+(defvar
+  tap-timeout 100
+  hold-timeout 300
+  press-timeout 300
+
+  tt $tap-timeout
+  ht $hold-timeout
+  pt $press-timeout
+)
+
+;;$ttls - triple-tap-layer-switch
+(deftemplate triple-tap-layer-switch (key layer-name)
+  $key (tap-dance $pt (
+    $key
+    (macro $key $key)
+    (layer-switch $layer-name)
+  ))
+)
+
+;;$slw - shotrtcut-layout-switch
+(deftemplate shortcut-layout-switch (start-key first-key second-key third-key keyboard-layout)
+  (defseq fct ($first-key $second-key $third-key)
+  $start-key
+  )
+)
+
+(defalias
+  ;;ttls-default ($ttls (grv default)
+  ;;ttls-transparent ($ttls (grv transparent)
+  slw-transparent (tap-dance-eager $pt (
+    (macro S-1 t r a n s)
+    (layer-switch transparent)
+  ))
+  slw-default (tap-dance-eager $pt (
+    (macro S-1 d e f)
+    (layer-switch default)
+  ))
+)
+
+(deflayermap (default)
+  caps (tap-hold $tt $ht bspc caps)
+
+  a (tap-hold-release $tt $ht a lctl)
+  s (tap-hold-release $tt $ht s lsft)
+  d (tap-hold-release $tt $ht d lmet)
+  f (tap-hold-release $tt $ht f lalt)
+  j (tap-hold-release $tt $ht j ralt)
+  k (tap-hold-release $tt $ht k rmet)
+  l (tap-hold-release $tt $ht l rsft)
+  ; (tap-hold-release $tt $ht ; rctl)
+
+  (template-expand triple-tap-layer-switch grv transparent)
+
+  spc (tap-hold $tt $ht spc (layer-while-held extended))
+)
+
+(deflayermap (transparent)
+  (template-expand triple-tap-layer-switch grv default)
+)
+
+(deflayermap (extended)
+  i pgdn
+  o pgup
+
+  q esc
+
+  k up
+  h left
+  j down
+  l rght
+
+  b C-left
+  w C-rght
+
+  m C-S-tab ;; previous tab
+  , C-tab ;; next tab
+
+  n home
+  . end
+
+  v C-v ;; paste
+  c C-c ;; yank/copy
+  z C-z ;; undo
+  y C-y ;; redo
+  x C-x ;; cut
+)
+
+;; (deflayer qwerty
+;;   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
+;;   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc pgup
+;;   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \    pgdn
+;;   caps a    s    d    f    g    h    j    k    l    ;    '    ret       home
+;;   lsft z    x    c    v    b    n    m    ,    .    /    rsft   up      end
+;;   lctl lmet lalt           spc            ralt      rctl left   down    rght
+;; )
+;; 
+;; (deflayer dvorak
+;;   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
+;;   grv  1    2    3    4    5    6    7    8    9    0    [    ]    bspc pgup
+;;   tab  '    ,    .    p    y    f    g    c    r    l    /    =    \    pgdn
+;;   caps a    o    e    u    i    d    h    t    n    s    -    ret       home
+;;   lsft ;    q    j    k    x    b    m    w    v    z    rsft   up      end
+;;   lctl lmet lalt           spc            ralt      rctl left   down    rght
+;; )
