@@ -10,7 +10,7 @@
 (defvar
   tap-timeout 100
   hold-timeout 300
-  press-timeout 400
+  press-timeout 300
 
   tt $tap-timeout
   ht $hold-timeout
@@ -71,6 +71,8 @@
   i pgdn
   o pgup
 
+  q esc
+
   k up
   h left
   j down
@@ -88,6 +90,7 @@
   v C-v ;; paste
   c C-c ;; yank/copy
   z C-z ;; undo
+  y C-y ;; redo
   x C-x ;; cut
 )
 
