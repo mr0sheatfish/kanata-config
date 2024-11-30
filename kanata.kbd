@@ -1,3 +1,9 @@
+(include kanata-cfg.kbd)
+(include kanata-sequences.kbd)
+(include kanata-vars.kbd)
+(include kanata-aliases.kbd)
+(include kanata-templates.kbd)
+
 (defsrc
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc pgup
@@ -7,90 +13,207 @@
   lctl lmet lalt           spc            ralt      rctl left   down    rght
 )
 
-(defvar
-  tap-timeout 100
-  hold-timeout 300
-  press-timeout 300
+(deflayermap (norman)
+  rctrl _
+  ralt _
+  
+  caps (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  bspc (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  
+  grv @grv-ext
+;;  (template-expand triple-tap-layer-switch grv transparent)
+  
+  tab @tab-ext
+  
+  q q
+  w w
+  e d
+  r f
+  t k
+  y j
+  u u
+  i r
+  o l
+  p ;
+  [ [
+  ] ]
+  
+  a (tap-hold-release $tt $ht a lctl)
+  s (tap-hold-release $tt $ht s lsft)
+  d (tap-hold-release $tt $ht e lmet)
+  f (tap-hold-release $tt $ht t lalt)
+  g g
+  h y
+  j (tap-hold-release $tt $ht n ralt)
+  k (tap-hold-release $tt $ht i rmet)
+  l (tap-hold-release $tt $ht o rsft)
+  ; (tap-hold-release $tt $ht h rctl)
+  ' '
+  
+  z z
+  x x
+  c c
+  v v
+  b b
+  n p
+  m m
+  , ,
+  . .
+  / /
 
-  tt $tap-timeout
-  ht $hold-timeout
-  pt $press-timeout
+  spc @spc-ext
 )
 
-;;$ttls - triple-tap-layer-switch
-(deftemplate triple-tap-layer-switch (key layer-name)
-  $key (tap-dance $pt (
-    $key
-    (macro $key $key)
-    (layer-switch $layer-name)
-  ))
-)
-
-;;$slw - shotrtcut-layout-switch
-(deftemplate shortcut-layout-switch (start-key first-key second-key third-key keyboard-layout)
-  (defseq fct ($first-key $second-key $third-key)
-  $start-key
-  )
-)
-
-(defalias
-  ;;ttls-default ($ttls (grv default)
-  ;;ttls-transparent ($ttls (grv transparent)
-  slw-transparent (tap-dance-eager $pt (
-    (macro S-1 t r a n s)
-    (layer-switch transparent)
-  ))
-  slw-default (tap-dance-eager $pt (
-    (macro S-1 d e f)
-    (layer-switch default)
-  ))
-)
-
-(deflayermap (default)
-  caps (tap-hold $tt $ht bspc caps)
-
+(deflayermap (qwerty)
+  rctrl _
+  ralt _
+  
+  caps (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  bspc (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  
+  grv @grv-ext
+;;  (template-expand triple-tap-layer-switch grv transparent)
+  
+  tab @tab-ext
+  
   a (tap-hold-release $tt $ht a lctl)
   s (tap-hold-release $tt $ht s lsft)
   d (tap-hold-release $tt $ht d lmet)
   f (tap-hold-release $tt $ht f lalt)
+
   j (tap-hold-release $tt $ht j ralt)
   k (tap-hold-release $tt $ht k rmet)
   l (tap-hold-release $tt $ht l rsft)
   ; (tap-hold-release $tt $ht ; rctl)
+  
+  spc @spc-ext
+)
 
-  (template-expand triple-tap-layer-switch grv transparent)
+(deflayermap (jcuken)
+  rctrl _
+  ralt _
+  
+  caps (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  bspc (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  
+  grv @grv-ext
+;; (template-expand triple-tap-layer-switch grv transparent)
+  
+  tab @tab-ext
+  
+  q (🔣 й)
+  w (🔣 ц)
+  e (🔣 у)
+  r (🔣 к)
+  t (🔣 е)
+  y (🔣 н)
+  u (🔣 г)
+  i (🔣 ш)
+  o (🔣 щ)
+  p (🔣 з)
+  [ (🔣 х)
+  ] (🔣 ъ)
+  
+  a (tap-hold-release $tt $ht (🔣 ф) lctl)
+  s (tap-hold-release $tt $ht (🔣 ы) lsft)
+  d (tap-hold-release $tt $ht (🔣 в) lmet)
+  f (tap-hold-release $tt $ht (🔣 а) lalt)
+  g (🔣 п)
+  h (🔣 р)
+  j (tap-hold-release $tt $ht (🔣 о) ralt)
+  k (tap-hold-release $tt $ht (🔣 л) rmet)
+  l (tap-hold-release $tt $ht (🔣 д) rsft)
+  ; (tap-hold-release $tt $ht (🔣 ж) rctl)
+  ' (🔣 э)
+  
+  z (🔣 я)
+  x (🔣 ч)
+  c (🔣 с)
+  v (🔣 м)
+  b (🔣 и)
+  n (🔣 т)
+  m (🔣 ь)
+  , (🔣 б)
+  . (🔣 ю)
+  / (🔣 .)
 
-  spc (tap-hold $tt $ht spc (layer-while-held extended))
+  spc @spc-ext
+)
+
+(deflayermap (leonov)
+  rctrl _
+  ralt _
+  
+  caps (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  bspc (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  
+  grv @grv-ext
+;;  (template-expand triple-tap-layer-switch grv transparent)
+  
+  tab @tab-ext
+  
+  q (🔣 щ)
+  w (🔣 ц)
+  e (🔣 к)
+  r (🔣 л)
+  t (🔣 б)
+  y (🔣 й)
+  u (🔣 ъ)
+  i (🔣 ы)
+  o (🔣 я)
+  p (🔣 э)
+  [ (🔣 ф)
+  ] (🔣 .)
+  
+  a (tap-hold-release $tt $ht (🔣 ч) lctl)
+  s (tap-hold-release $tt $ht (🔣 з) lsft)
+  d (tap-hold-release $tt $ht (🔣 в) lmet)
+  f (tap-hold-release $tt $ht (🔣 н) lalt)
+  g (🔣 т)
+  h (🔣 д)
+  j (tap-hold-release $tt $ht (🔣 и) ralt)
+  k (tap-hold-release $tt $ht (🔣 а) rmet)
+  l (tap-hold-release $tt $ht (🔣 о) rsft)
+  ; (tap-hold-release $tt $ht (🔣 е) rctl)
+  ' (🔣 с)
+  
+  z (🔣 ж)
+  x (🔣 х)
+  c (🔣 п)
+  v (🔣 р)
+  b (🔣 м)
+  n (🔣 г)
+  m (🔣 ь)
+  , (🔣 у)
+  . (🔣 ю)
+  / (🔣 ш)
+
+  spc @spc-ext
 )
 
 (deflayermap (transparent)
-  (template-expand triple-tap-layer-switch grv default)
+  grv @grv-ext
+;;  (template-expand triple-tap-layer-switch grv norman)
 )
 
 (deflayermap (extended)
-  caps del
-  
+  grv @grv-ext
+  caps caps
+  / sldr
   \ lrld
-  
   i pgdn
   o pgup
-
   q esc
-
   k up
   h left
   j down
   l rght
-
   b C-left
   w C-rght
-
-  m C-S-tab ;; previous tab
-  , C-tab ;; next tab
-
+  , C-S-tab ;; previous tab
+  . C-tab ;; next tab
   n home
-  . end
-
+  m end
   v C-v ;; paste
   c C-c ;; yank/copy
   z C-z ;; undo
@@ -98,20 +221,26 @@
   x C-x ;; cut
 )
 
-;; (deflayer qwerty
-;;   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
-;;   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc pgup
-;;   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \    pgdn
-;;   caps a    s    d    f    g    h    j    k    l    ;    '    ret       home
-;;   lsft z    x    c    v    b    n    m    ,    .    /    rsft   up      end
-;;   lctl lmet lalt           spc            ralt      rctl left   down    rght
-;; )
-;; 
-;; (deflayer dvorak
-;;   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
-;;   grv  1    2    3    4    5    6    7    8    9    0    [    ]    bspc pgup
-;;   tab  '    ,    .    p    y    f    g    c    r    l    /    =    \    pgdn
-;;   caps a    o    e    u    i    d    h    t    n    s    -    ret       home
-;;   lsft ;    q    j    k    x    b    m    w    v    z    rsft   up      end
-;;   lctl lmet lalt           spc            ralt      rctl left   down    rght
-;; )
+(deflayermap (extended-delete)
+  w @dac
+  b @dbc
+)
+
+(deflayermap (grv-layout-switch)
+  q (layer-switch transparent)
+  w (layer-switch extended)
+  1 (layer-switch qwerty)
+  2 (layer-switch norman)
+  3 (layer-switch jcuken)
+  4 (layer-switch leonov)
+  5 (layer-switch numpad)
+)
+
+(deflayer (numpad)
+  esc      f1   f2   f3   f4        f5        f6   f7   f8   f9   f10  f11  f12  del  ins
+  @grv-ext 1    2    3    (🔣 *)   (🔣 ^)    •    •    •    •    •    •    •    bspc pgup
+  tab      4    5    6    \         •         •    •    •    •    •    •    •    •    pgdn 
+  caps     7    8    9    +         •         •    •    •    •    •    •    ret       home
+  lsft     0    .    ,    -         •         •    •    •    •    •    rsft   up      end
+  lctl lmet lalt                spc                 ralt      rctl left   down    rght
+)

@@ -1,0 +1,8 @@
+;;$ttls - triple-tap-layer-switch
+(deftemplate triple-tap-layer-switch (key layer-name)
+  $key (tap-dance $pt (
+    $key
+    (macro $key $key)
+    (layer-switch $layer-name)
+  ))
+)

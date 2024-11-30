@@ -1,0 +1,170 @@
+(include kanata-cfg.kbd)
+(include kanata-sequences.kbd)
+(include kanata-vars.kbd)
+(include kanata-aliases.kbd)
+(include kanata-templates.kbd)
+
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc pgup
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \    pgdn
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret       home
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft   up      end
+  lctl lmet lalt           spc            ralt      rctl left   down    rght
+)
+
+(deflayermap (default)
+  rctrl _
+  ralt _
+  caps (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  bspc (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  a (tap-hold-release $tt $ht a lctl)
+  s (tap-hold-release $tt $ht s lsft)
+  d (tap-hold-release $tt $ht d lmet)
+  f (tap-hold-release $tt $ht f lalt)
+  j (tap-hold-release $tt $ht j ralt)
+  k (tap-hold-release $tt $ht k rmet)
+  l (tap-hold-release $tt $ht l rsft)
+  ; (tap-hold-release $tt $ht ; rctl)
+  (template-expand triple-tap-layer-switch grv transparent)
+  spc @spc-ext
+)
+
+;;(deflayer norman
+;;  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
+;;  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc pgup
+;;  tab  q    w    d    f    k    j    u    r    l    ;    [    ]    \    pgdn
+;;  caps a    s    e    t    g    y    n    i    o    h    '    ret       home
+;;  lsft z    x    c    v    b    p    m    ,    .    /    rsft   up      end
+;;  lctl lmet lalt           @spc-ext       ralt      rctl left   down    rght
+;;)
+(deflayermap norman
+  rctrl _
+  ralt _
+  caps (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  bspc (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  (template-expand triple-tap-layer-switch grv transparent)
+  q q
+  w w
+  e d
+  r f
+  t k
+  y j
+  u u
+  i r
+  o l
+  p ;
+  [ [
+  ] ]
+  a (tap-hold-release $tt $ht a lctl)
+  s (tap-hold-release $tt $ht s lsft)
+  d (tap-hold-release $tt $ht e lmet)
+  f (tap-hold-release $tt $ht t lalt)
+  g g
+  h y
+  j (tap-hold-release $tt $ht j ralt)
+  k (tap-hold-release $tt $ht i rmet)
+  l (tap-hold-release $tt $ht o rsft)
+  ; (tap-hold-release $tt $ht h rctl)
+  z z
+  x x
+  c c
+  v v
+  b b
+  n p
+  m m
+  , ,
+  . .
+  / /
+  spc @spc-ext
+)
+
+;;(deflayer russian
+;;  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
+;;  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc pgup
+;;  tab  й    ц    у    к    е    н    г    ш    щ    з    х    ъ    \    pgdn
+;;  caps ф    ы    в    а    п    р    о    л    д    ж    э    ret       home
+;;  lsft я    ч    с    м    и    т    ь    б    ю    .    rsft   up      end
+;;  lctl lmet lalt           spc            ralt      rctl left   down    rght
+(deflayermap russian
+  rctrl _
+  ralt _
+  caps (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  bspc (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  (template-expand triple-tap-layer-switch grv transparent)
+  q (unicode й)
+  w (unicode ц)
+  e (unicode у)
+  r (unicode к)
+  t (unicode е)
+  y (unicode н)
+  u (unicode г)
+  i (unicode ш)
+  o (unicode щ)
+  p (unicode з)
+  [ (unicode х)
+  ] (unicode ъ)
+  a (tap-hold-release $tt $ht (unicode ф) lctl)
+  s (tap-hold-release $tt $ht (unicode ы) lsft)
+  d (tap-hold-release $tt $ht (unicode в) lmet)
+  f (tap-hold-release $tt $ht (unicode а) lalt)
+  g (unicode п)
+  h (unicode р)
+  j (tap-hold-release $tt $ht (unicode о) ralt)
+  k (tap-hold-release $tt $ht (unicode л) rmet)
+  l (tap-hold-release $tt $ht (unicode д) rsft)
+  ; (tap-hold-release $tt $ht (unicode ж) rctl)
+  ' (unicode э)
+  z (unicode я)
+  x (unicode ч)
+  c (unicode с)
+  v (unicode м)
+  b (unicode и)
+  n (unicode т)
+  m (unicode ь)
+  , (unicode б)
+  . (unicode ю)
+  / (unicode .)
+  spc @spc-ext
+)
+(deflayermap (transparent)
+  (template-expand triple-tap-layer-switch grv default)
+)
+
+(deflayermap (extended)
+  caps caps
+  / sldr
+  \ lrld
+  i pgdn
+  o pgup
+  q esc
+  k up
+  h left
+  j down
+  l rght
+  b C-left
+  w C-rght
+  , C-S-tab ;; previous tab
+  . C-tab ;; next tab
+  n home
+  m end
+  v C-v ;; paste
+  c C-c ;; yank/copy
+  z C-z ;; undo
+  y C-y ;; redo
+  x C-x ;; cut
+)
+
+(deflayermap (extended-delete)
+  w @dac
+  b @dbc
+)
+
+;; (deflayer dvorak
+;;   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
+;;   grv  1    2    3    4    5    6    7    8    9    0    [    ]    bspc pgup
+;;   tab  '    ,    .    p    y    f    g    c    r    l    /    =    \    pgdn
+;;   caps a    o    e    u    i    d    h    t    n    s    -    ret       home
+;;   lsft ;    q    j    k    x    b    m    w    v    z    rsft   up      end
+;;   lctl lmet lalt           spc            ralt      rctl left   down    rght
+;; )
