@@ -1,0 +1,9 @@
+(defvar
+  tap-timeout 100
+  hold-timeout 300
+  press-timeout 300
+
+  tt $tap-timeout
+  ht $hold-timeout
+  pt $press-timeout
+)

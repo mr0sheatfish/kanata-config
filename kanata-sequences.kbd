@@ -1,0 +1,11 @@
+(defseq 
+;;  default (q w e)
+;;  norman (n o r)
+;;  russian (r u s)
+)
+
+(defvirtualkeys
+;;  norman (layer-switch norman)
+;;  default (layer-switch default)
+;;  russian (layer-switch russian)
+)

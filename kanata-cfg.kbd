@@ -1,0 +1,5 @@
+(defcfg
+  windows-altgr add-lctl-release
+;;  process-unmapped-keys yes
+  delegate-to-first-layer no
+)

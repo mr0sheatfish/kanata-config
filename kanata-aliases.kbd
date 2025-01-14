@@ -1,0 +1,14 @@
+(defalias
+  ;;dbc - delete before cursor
+  dbc (multi lctrl bspc)
+
+  ;;dac - delete after cursor
+  dac (multi lctrl del)
+
+  ;;spc-ext - space extended
+  spc-ext (tap-hold $tt $ht spc (layer-while-held extended))
+  
+  tab-ext (tap-hold-release $tt $ht tab (layer-while-held numpad))
+  
+  grv-ext (tap-hold $tt $ht grv (layer-while-held grv-layout-switch))
+)
