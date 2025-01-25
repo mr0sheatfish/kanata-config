@@ -1,3 +1,9 @@
+(include kanata-cfg.kbd)
+(include kanata-sequences.kbd)
+(include kanata-vars.kbd)
+(include kanata-aliases.kbd)
+(include kanata-templates.kbd)
+
 (defsrc
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc pgup
@@ -7,90 +13,269 @@
   lctl lmet lalt           spc            ralt      rctl left   down    rght
 )
 
-(defvar
-  tap-timeout 100
-  hold-timeout 300
-  press-timeout 300
+(deflayermap (qwerty)
+  rctrl _
+  ralt _
 
-  tt $tap-timeout
-  ht $hold-timeout
-  pt $press-timeout
-)
+  caps (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  bspc (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
 
-;;$ttls - triple-tap-layer-switch
-(deftemplate triple-tap-layer-switch (key layer-name)
-  $key (tap-dance $pt (
-    $key
-    (macro $key $key)
-    (layer-switch $layer-name)
-  ))
-)
+  grv @grv-ext
+;;  (template-expand triple-tap-layer-switch grv transparent)
 
-;;$slw - shotrtcut-layout-switch
-(deftemplate shortcut-layout-switch (start-key first-key second-key third-key keyboard-layout)
-  (defseq fct ($first-key $second-key $third-key)
-  $start-key
-  )
-)
-
-(defalias
-  ;;ttls-default ($ttls (grv default)
-  ;;ttls-transparent ($ttls (grv transparent)
-  slw-transparent (tap-dance-eager $pt (
-    (macro S-1 t r a n s)
-    (layer-switch transparent)
-  ))
-  slw-default (tap-dance-eager $pt (
-    (macro S-1 d e f)
-    (layer-switch default)
-  ))
-)
-
-(deflayermap (default)
-  caps (tap-hold $tt $ht bspc caps)
+  tab @tab-ext
 
   a (tap-hold-release $tt $ht a lctl)
   s (tap-hold-release $tt $ht s lsft)
   d (tap-hold-release $tt $ht d lmet)
   f (tap-hold-release $tt $ht f lalt)
+
   j (tap-hold-release $tt $ht j ralt)
   k (tap-hold-release $tt $ht k rmet)
   l (tap-hold-release $tt $ht l rsft)
   ; (tap-hold-release $tt $ht ; rctl)
 
-  (template-expand triple-tap-layer-switch grv transparent)
+  spc @spc-ext
+)
 
-  spc (tap-hold $tt $ht spc (layer-while-held extended))
+(deflayermap (norman)
+  rctrl _
+  ralt _
+
+  caps (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  bspc (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+
+  grv @grv-ext
+;;  (template-expand triple-tap-layer-switch grv transparent)
+
+  tab @tab-ext
+
+  q q
+  w w
+  e d
+  r f
+  t k
+  y j
+  u u
+  i r
+  o l
+  p ;
+  [ [
+  ] ]
+
+  a (tap-hold-release $tt $ht a lctl)
+  s (tap-hold-release $tt $ht s lsft)
+  d (tap-hold-release $tt $ht e lmet)
+  f (tap-hold-release $tt $ht t lalt)
+  g g
+  h y
+  j (tap-hold-release $tt $ht n ralt)
+  k (tap-hold-release $tt $ht i rmet)
+  l (tap-hold-release $tt $ht o rsft)
+  ; (tap-hold-release $tt $ht h rctl)
+  ' '
+
+  z z
+  x x
+  c c
+  v v
+  b b
+  n p
+  m m
+  , ,
+  . .
+  / /
+ 
+  spc @spc-ext
+)
+
+(deflayermap (jcuken)
+  rctrl _
+  ralt _
+
+  caps (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  bspc (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+
+  grv @grv-ext
+;; (template-expand triple-tap-layer-switch grv transparent)
+
+  tab @tab-ext
+
+  q (switch ((and (layer qwerty) (input real q))) (🔣 й) break
+            ((and (layer norman) (input real q))) (🔣 й) break)
+  w (switch ((and (layer qwerty) (input real w))) (🔣 ц) break
+            ((and (layer norman) (input real w))) (🔣 ц) break)
+  e (switch ((and (layer qwerty) (input real e))) (🔣 у) break
+            ((and (layer norman) (input real d))) (🔣 в) break)
+  r (switch ((and (layer qwerty) (input real r))) (🔣 к) break
+            ((and (layer norman) (input real f))) (🔣 а) break)
+  t (switch ((and (layer qwerty) (input real t))) (🔣 е) break
+            ((and (layer norman) (input real k))) (🔣 л) break)
+  y (switch ((and (layer qwerty) (input real y))) (🔣 н) break
+            ((and (layer norman) (input real j))) (🔣 о) break)
+  u (switch ((and (layer qwerty) (input real u))) (🔣 г) break
+            ((and (layer norman) (input real u))) (🔣 г) break)
+  i (switch ((and (layer qwerty) (input real i))) (🔣 ш) break
+            ((and (layer norman) (input real r))) (🔣 к) break)
+  o (switch ((and (layer qwerty) (input real o))) (🔣 щ) break
+            ((and (layer norman) (input real l))) (🔣 д) break)
+  p (switch ((and (layer qwerty) (input real p))) (🔣 з) break
+            ((and (layer norman) (input real ;))) (🔣 ж) break)
+  [ (switch ((and (layer qwerty) (input real [))) (🔣 х) break
+            ((and (layer norman) (input real [))) (🔣 х) break)
+  ] (switch ((and (layer qwerty) (input real ]))) (🔣 ъ) break
+            ((and (layer norman) (input real ]))) (🔣 ъ) break)
+  a (switch ((and (layer qwerty) (input real a))) (tap-hold-release $tt $ht (🔣 ф) lctl) break
+            ((and (layer norman) (input real a))) (🔣 ф) break)
+  s (switch ((and (layer qwerty) (input real s))) (tap-hold-release $tt $ht (🔣 ы) lsft) break
+            ((and (layer norman) (input real s))) (🔣 ы) break)
+  d (switch ((and (layer qwerty) (input real d))) (tap-hold-release $tt $ht (🔣 в) lmet) break
+            ((and (layer norman) (input real e))) (🔣 у) break)
+  f (switch ((and (layer qwerty) (input real f))) (tap-hold-release $tt $ht (🔣 а) lalt) break
+            ((and (layer norman) (input real t))) (🔣 е) break)
+  g (switch ((and (layer qwerty) (input real g))) (🔣 п) break
+            ((and (layer norman) (input real g))) (🔣 п) break)
+  h (switch ((and (layer qwerty) (input real h))) (🔣 р) break
+            ((and (layer norman) (input real y))) (🔣 н) break)
+  j (switch ((and (layer qwerty) (input real j))) (tap-hold-release $tt $ht (🔣 о) ralt) break
+            ((and (layer norman) (input real n))) (🔣 т) break)
+  k (switch ((and (layer qwerty) (input real k))) (tap-hold-release $tt $ht (🔣 л) rmet) break
+            ((and (layer norman) (input real i))) (🔣 ш) break)
+  l (switch ((and (layer qwerty) (input real l))) (tap-hold-release $tt $ht (🔣 д) rsft) break
+            ((and (layer norman) (input real o))) (🔣 щ) break)
+  ; (switch ((and (layer qwerty) (input real ;))) (tap-hold-release $tt $ht (🔣 ж) rctl) break
+            ((and (layer norman) (input real h))) (🔣 р) break)
+  ' (switch ((and (layer qwerty) (input real '))) (🔣 э) break
+            ((and (layer norman) (input real '))) (🔣 э) break)
+  z (switch ((and (layer qwerty) (input real z))) (🔣 я) break
+            ((and (layer norman) (input real z))) (🔣 я) break)
+  x (switch ((and (layer qwerty) (input real x))) (🔣 ч) break
+            ((and (layer norman) (input real x))) (🔣 ч) break)
+  c (switch ((and (layer qwerty) (input real c))) (🔣 с) break
+            ((and (layer norman) (input real c))) (🔣 с) break)
+  v (switch ((and (layer qwerty) (input real v))) (🔣 м) break
+            ((and (layer norman) (input real v))) (🔣 м) break)
+  b (switch ((and (layer qwerty) (input real b))) (🔣 и) break
+            ((and (layer norman) (input real b))) (🔣 и) break)
+  n (switch ((and (layer qwerty) (input real n))) (🔣 т) break
+            ((and (layer norman) (input real p))) (🔣 з) break)
+  m (switch ((and (layer qwerty) (input real m))) (🔣 ь) break
+            ((and (layer norman) (input real m))) (🔣 ь) break)
+  , (switch ((and (layer qwerty) (input real ,))) (🔣 б) break
+            ((and (layer norman) (input real ,))) (🔣 б) break)
+  . (switch ((and (layer qwerty) (input real .))) (🔣 ю) break
+            ((and (layer norman) (input real .))) (🔣 ю) break)
+  / (switch ((and (layer qwerty) (input real /))) (🔣 .) break
+            ((and (layer norman) (input real /))) (🔣 .) break)
+
+  spc @spc-ext
+)
+
+(deflayermap (leonov)
+  rctrl _
+  ralt _
+
+  caps (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+  bspc (fork (tap-hold-press $tt $ht bspc (layer-while-held extended-delete)) del (lsft rsft))
+
+  grv @grv-ext
+;;  (template-expand triple-tap-layer-switch grv transparent)
+
+  tab @tab-ext
+
+  q (switch ((and (layer qwerty) (input real q))) (🔣 щ) break
+            ((and (layer norman) (input real q))) (🔣 щ) break)
+  w (switch ((and (layer qwerty) (input real w))) (🔣 ц) break
+            ((and (layer norman) (input real w))) (🔣 ц) break)
+  e (switch ((and (layer qwerty) (input real e))) (🔣 к) break
+            ((and (layer norman) (input real d))) (🔣 к) break)
+  r (switch ((and (layer qwerty) (input real r))) (🔣 л) break
+            ((and (layer norman) (input real f))) (🔣 л) break)
+  t (switch ((and (layer qwerty) (input real t))) (🔣 б) break
+            ((and (layer norman) (input real k))) (🔣 б) break)
+  y (switch ((and (layer qwerty) (input real y))) (🔣 й) break
+            ((and (layer norman) (input real j))) (🔣 й) break)
+  u (switch ((and (layer qwerty) (input real u))) (🔣 ъ) break
+            ((and (layer norman) (input real u))) (🔣 ъ) break)
+  i (switch ((and (layer qwerty) (input real i))) (🔣 ы) break
+            ((and (layer norman) (input real r))) (🔣 ы) break)
+  o (switch ((and (layer qwerty) (input real o))) (🔣 я) break
+            ((and (layer norman) (input real l))) (🔣 я) break)
+  p (switch ((and (layer qwerty) (input real p))) (🔣 э) break
+            ((and (layer norman) (input real ;))) (🔣 э) break)
+  [ (switch ((and (layer qwerty) (input real [))) (🔣 ф) break
+            ((and (layer norman) (input real [))) (🔣 ф) break)
+  ] (switch ((and (layer qwerty) (input real ]))) (🔣 .) break
+            ((and (layer norman) (input real ]))) (🔣 .) break)
+  a (switch ((and (layer qwerty) (input real a))) (tap-hold-release $tt $ht (🔣 ч) lctl) break
+            ((and (layer norman) (input real a))) (🔣 ч) break)
+  s (switch ((and (layer qwerty) (input real s))) (tap-hold-release $tt $ht (🔣 з) lsft) break
+            ((and (layer norman) (input real s))) (🔣 з) break)
+  d (switch ((and (layer qwerty) (input real d))) (tap-hold-release $tt $ht (🔣 в) lmet) break
+            ((and (layer norman) (input real e))) (🔣 в) break)
+  f (switch ((and (layer qwerty) (input real f))) (tap-hold-release $tt $ht (🔣 н) lalt) break
+            ((and (layer norman) (input real t))) (🔣 н) break)
+  g (switch ((and (layer qwerty) (input real g))) (🔣 т) break
+            ((and (layer norman) (input real g))) (🔣 т) break)
+  h (switch ((and (layer qwerty) (input real h))) (🔣 д) break
+            ((and (layer norman) (input real y))) (🔣 д) break)
+  j (switch ((and (layer qwerty) (input real j))) (tap-hold-release $tt $ht (🔣 и) ralt) break
+            ((and (layer norman) (input real n))) (🔣 и) break)
+  k (switch ((and (layer qwerty) (input real k))) (tap-hold-release $tt $ht (🔣 а) rmet) break
+            ((and (layer norman) (input real i))) (🔣 а) break)
+  l (switch ((and (layer qwerty) (input real l))) (tap-hold-release $tt $ht (🔣 о) rsft) break
+            ((and (layer norman) (input real o))) (🔣 о) break)
+  ; (switch ((and (layer qwerty) (input real ;))) (tap-hold-release $tt $ht (🔣 е) rctl) break
+            ((and (layer norman) (input real h))) (🔣 е) break)
+  ' (switch ((and (layer qwerty) (input real '))) (🔣 с) break
+            ((and (layer norman) (input real '))) (🔣 с) break)
+  z (switch ((and (layer qwerty) (input real z))) (🔣 ж) break
+            ((and (layer norman) (input real z))) (🔣 ж) break)
+  x (switch ((and (layer qwerty) (input real x))) (🔣 х) break
+            ((and (layer norman) (input real x))) (🔣 х) break)
+  c (switch ((and (layer qwerty) (input real c))) (🔣 п) break
+            ((and (layer norman) (input real c))) (🔣 п) break)
+  v (switch ((and (layer qwerty) (input real v))) (🔣 р) break
+            ((and (layer norman) (input real v))) (🔣 р) break)
+  b (switch ((and (layer qwerty) (input real b))) (🔣 м) break
+            ((and (layer norman) (input real b))) (🔣 м) break)
+  n (switch ((and (layer qwerty) (input real n))) (🔣 г) break
+            ((and (layer norman) (input real p))) (🔣 г) break)
+  m (switch ((and (layer qwerty) (input real m))) (🔣 ё) break
+            ((and (layer norman) (input real m))) (🔣 ё) break)
+  , (switch ((and (layer qwerty) (input real ,))) (🔣 ь) break
+            ((and (layer norman) (input real ,))) (🔣 ь) break)
+  . (switch ((and (layer qwerty) (input real .))) (🔣 у) break
+            ((and (layer norman) (input real .))) (🔣 у) break)
+  / (switch ((and (layer qwerty) (input real /))) (🔣 ю) break
+            ((and (layer norman) (input real /))) (🔣 ю) break)
+
+  spc @spc-ext
 )
 
 (deflayermap (transparent)
-  (template-expand triple-tap-layer-switch grv default)
+  grv @grv-ext
+;;  (template-expand triple-tap-layer-switch grv norman)
 )
 
 (deflayermap (extended)
-  caps del
-  
+  grv @grv-ext
+  caps caps
+  / sldr
   \ lrld
-  
   i pgdn
   o pgup
-
   q esc
-
   k up
   h left
   j down
   l rght
-
   b C-left
   w C-rght
-
-  m C-S-tab ;; previous tab
-  , C-tab ;; next tab
-
+  , C-S-tab ;; previous tab
+  . C-tab ;; next tab
   n home
-  . end
-
+  m end
   v C-v ;; paste
   c C-c ;; yank/copy
   z C-z ;; undo
@@ -98,20 +283,26 @@
   x C-x ;; cut
 )
 
-;; (deflayer qwerty
-;;   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
-;;   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc pgup
-;;   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \    pgdn
-;;   caps a    s    d    f    g    h    j    k    l    ;    '    ret       home
-;;   lsft z    x    c    v    b    n    m    ,    .    /    rsft   up      end
-;;   lctl lmet lalt           spc            ralt      rctl left   down    rght
-;; )
-;; 
-;; (deflayer dvorak
-;;   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
-;;   grv  1    2    3    4    5    6    7    8    9    0    [    ]    bspc pgup
-;;   tab  '    ,    .    p    y    f    g    c    r    l    /    =    \    pgdn
-;;   caps a    o    e    u    i    d    h    t    n    s    -    ret       home
-;;   lsft ;    q    j    k    x    b    m    w    v    z    rsft   up      end
-;;   lctl lmet lalt           spc            ralt      rctl left   down    rght
-;; )
+(deflayermap (extended-delete)
+  w @dac
+  b @dbc
+)
+
+(deflayermap (grv-layout-switch)
+  q (layer-switch transparent)
+  w (layer-switch extended)
+  1 (layer-switch qwerty)
+  2 (layer-switch norman)
+  3 (layer-switch jcuken)
+  4 (layer-switch leonov)
+  5 (layer-switch numpad)
+)
+
+(deflayer (numpad)
+  esc      f1   f2   f3   f4        f5        f6   f7   f8   f9   f10  f11  f12  del  ins
+  @grv-ext 1    2    3    (🔣 *)   (🔣 ^)    •    •    •    •    •    •    •    bspc pgup
+  tab      4    5    6    /         •         •    •    •    •    •    •    •    •    pgdn 
+  caps     7    8    9    +         •         •    •    •    •    •    •    ret       home
+  lsft     0    .    ,    -         •         •    •    •    •    •    rsft   up      end
+  lctl lmet lalt                spc                 ralt      rctl left   down    rght
+)

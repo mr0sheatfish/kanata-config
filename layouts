@@ -1,0 +1,42 @@
+;;qwerty
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc pgup
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \    pgdn
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret       home
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft   up      end
+  lctl lmet lalt           spc            ralt      rctl left   down    rght
+;;norman
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc pgup
+  tab  q    w    d    f    k    j    u    r    l    ;    [    ]    \    pgdn
+  caps a    s    e    t    g    y    n    i    o    h    '    ret       home
+  lsft z    x    c    v    b    p    m    ,    .    /    rsft   up      end
+  lctl lmet lalt           spc       ralt      rctl left   down    rght
+;;dvorak
+   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
+   grv  1    2    3    4    5    6    7    8    9    0    [    ]    bspc pgup
+   tab  '    ,    .    p    y    f    g    c    r    l    /    =    \    pgdn
+   caps a    o    e    u    i    d    h    t    n    s    -    ret       home
+   lsft ;    q    j    k    x    b    m    w    v    z    rsft   up      end
+   lctl lmet lalt           spc            ralt      rctl left   down    rght
+;;jcuken
+  esc  f1      f2     f3      f4     f5      f6     f7      f8     f9      f10    f11     f12    del    ins
+  grv  1       2      3       4      5       6      7       8      9       0      -       =      bspc   pgup
+  tab  (🔣 й) (🔣 ц) (🔣 у) (🔣 к) (🔣 е) (🔣 н) (🔣 г) (🔣 ш) (🔣 щ) (🔣 з) (🔣 х) (🔣 ъ) \      pgdn
+  caps (🔣 ф) (🔣 ы) (🔣 в) (🔣 а) (🔣 п) (🔣 р) (🔣 о) (🔣 л) (🔣 д) (🔣 ж) (🔣 э)         ret   home
+  lsft (🔣 я) (🔣 ч) (🔣 с) (🔣 м) (🔣 и) (🔣 т) (🔣 ь) (🔣 б) (🔣 ю) (🔣 .)     rsft        up    end
+  lctl lmet    lalt                         spc                         ralt   rctl   left        down  rght
+;;leonov
+  esc  f1      f2     f3      f4     f5      f6     f7      f8     f9      f10    f11     f12    del    ins
+  grv  1       2      3       4      5       6      7       8      9       0      -       =      bspc   pgup
+  tab  (🔣 щ) (🔣 ц) (🔣 к) (🔣 л) (🔣 б) (🔣 й) (🔣 ъ) (🔣 ы) (🔣 я) (🔣 э) (🔣 ф) (🔣 .) \      pgdn
+  caps (🔣 ч) (🔣 з) (🔣 в) (🔣 н) (🔣 т) (🔣 д) (🔣 и) (🔣 а) (🔣 о) (🔣 е) (🔣 с)         ret   home
+  lsft (🔣 ж) (🔣 х) (🔣 п) (🔣 р) (🔣 м) (🔣 г) (🔣 ё) (🔣 ь) (🔣 у) (🔣 ю)     rsft        up    end
+  lctl lmet    lalt                         spc                         ralt   rctl   left        down  rght
+;;num-pad
+   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del  ins
+   grv  1    2    3    *    •    •    •    •    •    •    •    •    bspc pgup
+   tab  4    5    6    \    •    •    •    •    •    •    •    •    •    pgdn
+   caps 7    8    9    +    •    •    •    •    •    •    •    ret       home
+   lsft 0    .    ,    -    •    •    •    •    •    •    rsft   up      end
+   lctl lmet lalt           spc            ralt      rctl left   down    rght
